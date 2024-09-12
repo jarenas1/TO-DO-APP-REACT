@@ -1,5 +1,6 @@
 import { useReducer } from "react"
 import { todoReducer } from "./todoReduce";
+import { TodoList } from "./TodoList";
 
 //Create the initial list of todo's
 
@@ -18,19 +19,13 @@ export  const TodoApp = () => {
 
 <div className="row">
     <div className="col-7">
-        <ul className="list-group">
-            {
-                todos.map((todo) => (
-                    <li key={todo.id} className="list-group-item d-flex justify-content-between">
-                    <span className="align-self-center">Item</span>
-                    <button className="btn btn-danger">Delete</button>
-                </li>
-                ))
-            }
-        </ul>
+        {/*TODOLIST */}
+        <TodoList todos = {todos}/>
+        {/*TODOLIST */}
     </div>
 
     <div className="col-5">
+        {/*TODOADD ON NEW TODO(UN TO D<O)*/}
         <h4>Add TODO</h4>
         <hr />
         <form action="">
