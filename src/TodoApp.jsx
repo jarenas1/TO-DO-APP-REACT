@@ -1,6 +1,7 @@
 import { useReducer } from "react"
 import { todoReducer } from "./todoReduce";
 import { TodoList } from "./TodoList";
+import { TodoAdd } from "./TodoAdd";
 
 //Create the initial list of todo's
 
@@ -12,6 +13,11 @@ const initialState = [
 export  const TodoApp = () => {
 
     const [todos, dispatchTodo] = useReducer(todoReducer, initialState);
+
+    const handleNewTodo = (todo) =>{
+        console.log({todo});
+        
+    };
   return (
     <>
         <h1>ToDo App: 10, <small> Pending: 2</small></h1>
@@ -28,11 +34,7 @@ export  const TodoApp = () => {
         {/*TODOADD ON NEW TODO(UN TO D<O)*/}
         <h4>Add TODO</h4>
         <hr />
-        <form action="">
-            <input type="text" placeholder="Add your todo" className="form-control"/>
-
-            <button type="submit" className="btn btn-primary mt-2">Add</button>
-        </form>
+        <TodoAdd onNewTodo={(event) => handleNewTodo(event)}/>
     </div>
 
 </div>
