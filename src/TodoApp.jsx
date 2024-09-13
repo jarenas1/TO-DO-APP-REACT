@@ -1,18 +1,29 @@
-import { useReducer } from "react"
+import { useEffect, useReducer } from "react"
 import { todoReducer } from "./todoReduce";
 import { TodoList } from "./TodoList";
 import { TodoAdd } from "./TodoAdd";
 
-//Create the initial list of todo's
 
 const initialState = [
-  { id: new Date().getTime(), description: "Learn about React", done: false },
-  { id: new Date().getTime(), description: "Learn about SpringBoot", done: false },
+//   { id: new Date().getTime(), description: "Learn about React", done: false },
+//   { id: new Date().getTime(), description: "Learn about SpringBoot", done: false },
+//TRAEREMOS LA DATA DESDE EL LOCAL STORAGE
 ];
+
+const init = () =>{
+    return JSON.parse(localStorage.getItem("todos")) || []; //pasa lo del local storage a objetc, si no encientra nada crea un array vacio
+}
 
 export  const TodoApp = () => {
 
-    const [todos, dispatchTodo] = useReducer(todoReducer, initialState);
+    const [todos, dispatchTodo] = useReducer(todoReducer, initialState, init); //init es el valor inicial PARA EVIRAR QUE AL RECARGARSE SE PIERFA LO DEL LOCAL STORAGE
+
+    //AÑADIMOS TODOS AL LOCAL STORAGE
+    useEffect(()=>{
+        //AL GUARDAR EL ESTADO ACTUAL EN EL LOCAL STORAGE
+        localStorage.setItem("todos", JSON.stringify(todos));
+    },[todos]) //cada que los todos cambien se lanza
+
 
     const handleNewTodo = (todo) =>{
         //CREAMOS LA ACCION PARA EL REDUCE, ESTA SE SETEO DE EL REDUCER
